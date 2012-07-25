@@ -1,4 +1,6 @@
-TetraHIS
-========
+Ruby TetraHIS
+=============
 
-Ruby API for the TetraHIS (GP management software) patient agenda module
+API for the TetraHIS (GP management software) patient agenda module
+
+    http://www.tetrahis.nl/
