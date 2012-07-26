@@ -21,8 +21,8 @@ The response object exposes a data method which contains the models, if any, whi
     tetra.get_agendas.data => [<Earlydoc::Tetra::Agenda>,..]
     tetra.get_agenda_slots.data => [<Earlydoc::Tetra::SlotList>,..]
     tetra.get_agenda_slots( DateTime.now + 3.days ).data => [<Earlydoc::Tetra::SlotList>,..]
-    tetra.get_agenda_settings( praktijk_id )
-    tetra.get_agenda_slots_with_settings( ['Consult', 'Spreekuur'] )
+    tetra.get_agenda_settings( practice_id )
+    tetra.get_agenda_slots_with_settings( ['Consult', 'Spreekuur', 'Telefonisch consult', 'Koffie'] )
     tetra.find_agenda( agenda_id ).data => <Earlydoc::Tetra::Agenda>
     tetra.get_schema_blocks.data => [<Earlydoc::Tetra::SchemaBlock>,..]
 
@@ -60,9 +60,25 @@ The models also expose a `to_xml` method that returns Tetra API-compatible XML:
 
 The available Tetra models are:
 
-+  `Earlydoc:Tetra::Agenda`
-+  `Earlydoc:Tetra::SchemaBlock`
-+  `Earlydoc:Tetra::SlotList`
-+  `Earlydoc:Tetra::Slot`
-+  `Earlydoc:Tetra::Patient`
-+  `Earlydoc:Tetra::Appointment`
++  `Earlydoc::Tetra::Agenda => <Earlydoc::Tetra::Agenda @name=nil, @id=nil>`
++  `Earlydoc::Tetra::SchemaBlock => <Earlydoc::Tetra::SchemaBlock @id=nil, @name=nil>`
++  `Earlydoc::Tetra::SlotList => <[<Earlydoc::Tetra::Slot>] @from=nil @to=nil @schema_block_id=nil @doctor=nil>`
++  `Earlydoc::Tetra::Slot => <Earlydoc::Tetra::Slot @id=nil, @agenda_id=nil, @begin=nil, @end=nil, @available=nil, @doctor=nil>`
++  `Earlydoc::Tetra::Patient => <Earlydoc::Tetra::Patient @id=nil @birthday=nil @sex=nil @last_name=nil>`
++  `Earlydoc::Tetra::Appointment => <Earlydoc::Tetra::Appointment>`
+
+### Testing
+
+Run the /test/integration_test_.rb file tests in order to test API methods against a live server. The necessary constants - `YOUR_SERVICE_IP`, `YOUR_USERNAME`, and `YOUR_PASSWORD` should be set manually in the rb file. By default, the integration tests are configured with `skip`; to run the integration tests, the skip line must be removed/commented out.
+
+### Colophon
+
+This Gem depends on the following core libraries:
+
++ httparty: https://github.com/jnunemaker/httparty
++ libxml-ruby: https://github.com/xml4r/libxml-ruby
++ libxml-to-hash: https://github.com/johannesthoma/libxml-to-hash
+
+### License
+
+The Ruby Tetra-HIS Gem is published under the New BSD license.
