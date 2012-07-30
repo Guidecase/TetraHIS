@@ -18,17 +18,21 @@ module Earlydoc
         else
           patient_node = XML::Node.new('PatientId', patient_id_or_options.to_s)
           rpc 'MakeAppointmentRequest', agenda_node, patient_node, from_node, to_node, remarks_node do |response|
+            response.data = Earlydoc::Tetra::Appointment.new response.hash['MakeAppointmentResult']
           end
         end
       end
     
       def find_patient_appointments(patient_id)
         rpc 'GetPatientAfsprakenRequest', XML::Node.new('PatientId', patient_id.to_s) do |response|
+          response.hash['GetPatientAfsprakenResult']['Afspraken']['PatientAfspraak'].each do |params|
+            response.data << Earlydoc::Tetra::Appointment.new( params )
+          end
         end
       end   
     
       def cancel_patient_appointment(appointment_id)
-        rpc 'DelPatientAfspraakRequest', XML::Node.new('Id', appointment_id.to_s) do |response|
+        rpc 'DelPatientAfspraakRequest', XML::Node.new('Id', appointment_id.to_s) do
         end
       end     
     

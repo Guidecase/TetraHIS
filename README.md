@@ -28,16 +28,16 @@ The response object exposes a data method which contains the models, if any, whi
 
 Use the appointment methods to manage appointments for known patients, or unknown patients with search params:
 
-    tetra.find_patient_appointments( patient_id )
+    tetra.find_patient_appointments( patient_id ).data => [<Earlydoc::Tetra::Appointment>,..]
     tetra.cancel_patient_appointment( appointment_id )
-    tetra.make_appointment( agenda_id, patient_id, DateTime.now + 1.hour, DateTime.now + 90.minutes, 'any additional remarks' )
-    tetra.make_appointment( agenda_id, {:last_name => surname, :email => email_addr, :birthday => bday}, DateTime.now + 1.hour, DateTime.now + 90.minutes, 'any additional remarks' )
+    tetra.make_appointment( agenda_id, patient_id, DateTime.now + 1.hour, DateTime.now + 90.minutes, 'any additional remarks' ).data => <Earlydoc::Tetra::Appointment>
+    tetra.make_appointment( agenda_id, {:last_name => surname, :email => email_addr, :birthday => bday}, DateTime.now + 1.hour, DateTime.now + 90.minutes, 'any additional remarks' ).data => <Earlydoc::Tetra::Appointment>
 
 Use the `find_patient` method with search params to locate patients:
 
-    tetra.find_patient( :bsn => patient_bsn )
-    tetra.find_patient( :last_name => surname )
-    tetra.find_patient( :last_name => surname, :sex => 'M', :birthday => bday )
+    tetra.find_patient( :bsn => patient_bsn ).data => <Earlydoc::Tetra::Patient>
+    tetra.find_patient( :last_name => surname ).data => <Earlydoc::Tetra::Patient>
+    tetra.find_patient( :last_name => surname, :sex => 'M', :birthday => bday ).data => <Earlydoc::Tetra::Patient>
 
 ### Error Handling
 
@@ -64,7 +64,7 @@ The available Tetra models are:
 +  `Earlydoc::Tetra::SchemaBlock => <Earlydoc::Tetra::SchemaBlock @id=nil, @name=nil>`
 +  `Earlydoc::Tetra::SlotList => <[<Earlydoc::Tetra::Slot>] @from=nil @to=nil @schema_block_id=nil @doctor=nil>`
 +  `Earlydoc::Tetra::Slot => <Earlydoc::Tetra::Slot @id=nil, @agenda_id=nil, @begin=nil, @end=nil, @available=nil, @doctor=nil>`
-+  `Earlydoc::Tetra::Patient => <Earlydoc::Tetra::Patient @id=nil @birthday=nil @sex=nil @last_name=nil>`
++  `Earlydoc::Tetra::Patient => <Earlydoc::Tetra::Patient @id=nil @birthday=nil @sex=nil @last_name=nil, @full_name=nil>`
 +  `Earlydoc::Tetra::Appointment => <Earlydoc::Tetra::Appointment>`
 
 ### Testing

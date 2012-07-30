@@ -14,6 +14,7 @@ module Earlydoc
       
       def find_patient_by_bsn(bsn)
         rpc 'FindPatientBSNRequest', XML::Node.new('BSN', bsn) do |response|
+          response.data = Earlydoc::Tetra::Patient.new response.hash['FindPatientBSNResult']
         end
       end
       
@@ -23,6 +24,7 @@ module Earlydoc
         birthday_node = XML::Node.new('BirthDay', format_date(birthday))
         
         rpc 'FindPatientRequest', name_node, birthday_node, sex_node do |response|
+          response.data = Earlydoc::Tetra::Patient.new response.hash['FindPatientResult']
         end
       end
     end

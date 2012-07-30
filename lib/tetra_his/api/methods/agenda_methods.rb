@@ -19,7 +19,7 @@ module Earlydoc
           end
         else
           rpc 'GetAgendaSlotsRequest' do |response|
-            unless response.hash['GetAgendaSlotsResult']['AppointmentBlockList']['Items']['AppointmentSlotList'].nil?            
+            unless response.hash['GetAgendaSlotsResult']['AppointmentBlockList']['Items']['AppointmentSlotList'].nil?
               response.hash['GetAgendaSlotsResult']['AppointmentBlockList']['Items']['AppointmentSlotList'].each do |params|
                 response.data << Earlydoc::Tetra::SlotList.new( params )
               end                

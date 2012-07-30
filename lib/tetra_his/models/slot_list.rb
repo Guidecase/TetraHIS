@@ -12,7 +12,9 @@ module Earlydoc
         @schema_block_id = params['SchemaBlokId']
         
         if params['Items']
-          params['Items']['AppointmentSlot'].each do |i|
+          slot_or_slots = params['Items']['AppointmentSlot']
+          slots = slot_or_slots.is_a?(Array) ? slot_or_slots : [slot_or_slots]
+          slots.each do |i|
             self << Earlydoc::Tetra::Slot.new(i)
           end
         end

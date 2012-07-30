@@ -1,7 +1,7 @@
 require File.expand_path('../../test/test_helper', __FILE__)
 
 class IntegrationTest < Test::Unit::TestCase
-  YOUR_SERVICE_IP = '127.0.0.1:3000'
+  YOUR_SERVICE_IP = '127.0.0.1'
   YOUR_USERNAME   = nil
   YOUR_PASSWORD   = nil
   
@@ -43,7 +43,7 @@ class IntegrationTest < Test::Unit::TestCase
   end
   
   def test_find_patient_by_search
-    response = @tetra.find_patient :last_name => 'Jansen', :birthday => DateTime.new('1972-03-08'), :sex => 'M'
+    response = @tetra.find_patient(:last_name => 'Vries', :birthday => DateTime.parse('2000-03-26'), :sex => 'M')
     assert_api_success response
   end
   
