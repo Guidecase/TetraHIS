@@ -23,7 +23,11 @@ module Earlydoc
       def rpc(method_name, *xml_nodes, &block)
         response = request method_name, xml_nodes
         response.data = []
-        yield response if block_given? && !response.error?
+        begin
+          yield response if block_given? && !response.error?
+        rescue NoMethodError => e
+          raise e unless is_data_parsing_error?(message)
+        end
         response
       end
     
@@ -42,6 +46,10 @@ module Earlydoc
       end
           
       private
+      
+      def is_data_parsing_error?(message)
+        message && message.include? "undefined method `[]' for nil:NilClass"
+      end
     
       def encoded_xml(xml_doc)
         xml_doc.to_s(:indent => false)
