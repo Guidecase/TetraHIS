@@ -32,7 +32,13 @@ module Earlydoc
         xml_nodes.each { |node| xml.root << node }
         options = {:XML => encoded_xml(xml)}
         
-        Earlydoc::Tetra::Response.new self.class.post '/', :body => options
+        begin
+          Earlydoc::Tetra::Response.new self.class.post '/', :body => options
+        rescue Errno::EHOSTUNREACH
+          Earlydoc::Tetra::Response.new "<ErrorString>Unreachable host</ErrorString><ErrorCode>1</ErrorCode>"
+        rescue Errno::ECONNREFUSED
+          Earlydoc::Tetra::Response.new "<ErrorString>Bad connection</ErrorString><ErrorCode>1</ErrorCode>"
+        end
       end
           
       private
