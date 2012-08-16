@@ -13,11 +13,11 @@ module Earlydoc
       end
       
       def error_code
-        error? ? raw.to_s[/ErrorCode>(.*?)</, 0].to_s : nil
+        error? ? raw.to_s[/ErrorCode>(.*?)</, 1].to_s : nil
       end
       
       def error_message
-        error? ? raw.to_s[/ErrorString>(.*?)</, 0].to_s : nil
+        error? ? raw.to_s[/ErrorString>(.*?)</, 1].to_s : nil
       end
       
       def xml
