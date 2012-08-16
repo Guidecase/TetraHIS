@@ -48,7 +48,7 @@ module Earlydoc
       private
       
       def is_data_parsing_error?(message)
-        message && message.include? "undefined method `[]' for nil:NilClass"
+        message && message.include?("undefined method `[]' for nil:NilClass")
       end
     
       def encoded_xml(xml_doc)
