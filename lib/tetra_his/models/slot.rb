@@ -14,6 +14,10 @@ module Earlydoc
         @doctor = params['Doctor']
       end        
       
+      def time
+        "#{self.begin.strftime('%A %d, %I:%M %p')}-#{self.end.strftime('%I:%M %p')}" if self.begin && self.end
+      end
+      
       def to_xml
         "<AppointmentSlot>" +
         "<DateTime>#{format_date(self.begin, '%Y-%m-%dT%H:%M:00')}</DateTime>" +
