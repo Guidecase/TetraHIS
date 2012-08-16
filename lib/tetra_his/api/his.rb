@@ -26,7 +26,7 @@ module Earlydoc
         begin
           yield response if block_given? && !response.error?
         rescue NoMethodError => e
-          raise e unless is_data_parsing_error?(message)
+          raise e unless is_data_parsing_error?(e.message)
         end
         response
       end
