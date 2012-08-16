@@ -3,7 +3,7 @@ module Earlydoc
     module AppointmentMethods
       extend ActiveSupport::Concern
     
-      def make_appointment(agenda_id, patient_id_or_options, from, to remarks=nil)
+      def make_appointment(agenda_id, patient_id_or_options, from, to, remarks=nil)
         agenda_node = XML::Node.new('AgendaId', agenda_id.to_s)
         remarks_node = XML::Node.new('Remarks', remarks)
         from_node = XML::Node.new('TimeFrom', format_date(from, "%Y-%m-%dT%H:%M:00"))

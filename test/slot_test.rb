@@ -19,4 +19,13 @@ class SlotTest < Test::Unit::TestCase
     slot = Earlydoc::Tetra::Slot.new(params)
     assert_valid_xml slot
   end  
+  
+  def test_time
+    slot = Earlydoc::Tetra::Slot.new
+    assert_nil slot.time, 'expected no time without begin and end times'
+    slot.begin = DateTime.now
+    assert_nil slot.time, 'expected no time without end time'
+    slot.end = DateTime.now + 100000
+    assert_not_nil slot.time, 'expected display time from begin and end'
+  end
 end
