@@ -13,9 +13,17 @@ module Earlydoc
         @available = params['Available']
         @doctor = params['Doctor']
       end        
+
+      def begin_time
+        self.begin ? Time.parse(self.begin) : nil
+      end
+
+      def end_time
+        self.end ? Time.parse(self.end) : nil
+      end
       
       def time
-        "#{self.begin.strftime('%A %d, %I:%M %p')}-#{self.end.strftime('%I:%M %p')}" if self.begin && self.end
+        "#{begin_time.strftime('%A %d, %I:%M %p')}-#{end_time.strftime('%I:%M %p')}" if self.begin && self.end
       end
       
       def to_xml
