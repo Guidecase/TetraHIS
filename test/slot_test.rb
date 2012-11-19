@@ -23,13 +23,13 @@ class SlotTest < Test::Unit::TestCase
     slot = Earlydoc::Tetra::Slot.new 'Available' => false
     assert_equal false, slot.available, "expected true availability initialized from false bool"
 
-    slot.availability = 'true'
+    slot.availabile = 'true'
     assert_equal true, slot.available, "expected true availability set from 'true'"
-    slot.availability = 'false'
+    slot.availabile = 'false'
     assert_equal false, slot.available, "expected false availability set from 'false'"
-    slot.availability = true
+    slot.availabile = true
     assert_equal true, slot.available, "expected true availability set from true"
-    slot.availability = false
+    slot.availabile = false
     assert_equal false, slot.available, "expected false availability set from false"
   end
   

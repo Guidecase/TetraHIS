@@ -14,7 +14,7 @@ module Earlydoc
         @doctor = params['Doctor']
       end
 
-      def availability=(val)
+      def availabile=(val)
         @available = val && val.to_s == 'true' ? true : false
       end      
 
