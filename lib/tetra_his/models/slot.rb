@@ -10,9 +10,13 @@ module Earlydoc
         @agenda_id = params['AgendaID']
         @begin = params['DateTime']
         @end = params['TimeTill']
-        @available = params['Available']
+        @available = params['Available'] && params['Available'].to_s == 'true' ? true : false
         @doctor = params['Doctor']
-      end        
+      end
+
+      def availability=(val)
+        @available = val && val.to_s == 'true' ? true : false
+      end      
 
       def begin_time
         self.begin ? Time.parse(self.begin) : nil
