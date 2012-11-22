@@ -2,7 +2,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name         = "tetra_his"
-  s.version      = '0.0.12'
+  s.version      = '0.0.13'
   s.platform     = Gem::Platform::RUBY  
   s.description  = "Tetra HIS"
   s.summary      = "Ruby API for the TetraHIS (GP management software) patient agenda module"

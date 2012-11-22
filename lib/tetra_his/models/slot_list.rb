@@ -5,9 +5,10 @@ module Earlydoc
       
       attr_reader :from, :to, :schema_block_id, :doctor
 
-      RANGE_IN_HOURS = 5
       TEN_MIN_IN_SECONDS = 10*60
       HOUR_IN_SECONDS = 60*60
+      
+      RANGE_IN_HOURS = 5
       MORNING_START = 8
       MIDDAY_START = 13
       EVENING_START = 18

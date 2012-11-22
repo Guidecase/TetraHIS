@@ -47,4 +47,12 @@ class SlotTest < Test::Unit::TestCase
     slot.end = (DateTime.now + 100000).to_s
     assert_not_nil slot.time, 'expected display time from begin and end'
   end
+
+  def test_begin_time
+    slot = Earlydoc::Tetra::Slot.new
+    slot.begin = Time.now.to_s
+    assert slot.begin_time.is_a?(Time), 'expected time object from time string'
+    slot.begin = Time.now
+    assert slot.begin_time.is_a?(Time), 'expected time object from time'
+  end
 end

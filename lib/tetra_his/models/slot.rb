@@ -19,11 +19,11 @@ module Earlydoc
       end      
 
       def begin_time
-        self.begin ? Time.parse(self.begin) : nil
+        self.begin && self.begin.is_a?(String) ? Time.parse(self.begin) : self.begin
       end
 
       def end_time
-        self.end ? Time.parse(self.end) : nil
+        self.end ? Time.parse(self.end) : self.end
       end
       
       def time
