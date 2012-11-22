@@ -14,7 +14,7 @@ module Earlydoc
       EVENING_START = 18
 
       class << self
-        def block(day_part=:morning)
+        def block(day_part=:morning, ts=nil)
           start = case day_part
             when :morning
               MORNING_START
@@ -23,7 +23,7 @@ module Earlydoc
             when :evening
               EVENING_START
           end
-          today = Time.parse("12:00 am", Time.now)
+          today = Time.parse "12:00 am", (ts || Time.now)
           list = Earlydoc::Tetra::SlotList.new 'BlockFrom' => today + (start * HOUR_IN_SECONDS), 
                                                'BlockEnd'  => today + (start * HOUR_IN_SECONDS) + (RANGE_IN_HOURS * HOUR_IN_SECONDS)
 

@@ -6,6 +6,13 @@ class SlotListTest < Test::Unit::TestCase
     assert_equal list.size, Earlydoc::Tetra::SlotList::RANGE_IN_HOURS * 6, 'expected number of slots equal to hours * six 10-minute'
   end
 
+  def test_block_with_time
+    day = 60 * 60 * 24
+    ts = Time.now + (day * 7)
+    list = Earlydoc::Tetra::SlotList.block :morning, ts
+    assert_equal ts.day, list.first.begin.day, 'expected slot times initialized from timestamp'
+  end
+
   def test_block_with_morning
     list = Earlydoc::Tetra::SlotList.block :morning
     start = Earlydoc::Tetra::SlotList::MORNING_START
