@@ -13,11 +13,12 @@ module Earlydoc
       format :plain
       default_timeout 30
     
-      attr_reader :auth
+      attr_reader :auth, :debug
     
-      def initialize(base_uri, username, password)
+      def initialize(base_uri, username, password, debug=false)
         self.class.base_uri base_uri
         @auth = { :username => username, :password => password }
+        @debug = debug
       end
       
       def rpc(method_name, *xml_nodes, &block)
@@ -33,8 +34,13 @@ module Earlydoc
     
       def request(method_name, *xml_nodes)
         xml = request_xml(method_name)
-        xml_nodes.each { |node| xml.root << node }
+        xml_nodes.flatten.each { |node| xml.root << node }
         options = {:XML => encoded_xml(xml)}
+
+        if @debug
+          p "XML REQUEST:"
+          p xml
+        end
         
         begin
           Earlydoc::Tetra::Response.new self.class.post '/', :body => options

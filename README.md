@@ -39,7 +39,7 @@ Use the `find_patient` method with search params to locate patients:
     tetra.find_patient( :last_name => surname ).data => <Earlydoc::Tetra::Patient>
     tetra.find_patient( :last_name => surname, :sex => 'M', :birthday => bday ).data => <Earlydoc::Tetra::Patient>
 
-### Error Handling
+### Error Handling and Debugging
 
 Check the response for an API error, and inspect it for details about the error:
 
@@ -47,6 +47,10 @@ Check the response for an API error, and inspect it for details about the error:
     if response.error?
       p "#{response.error_code} #{response.error_message}"
     end
+
+Print out the request XML by passing a debug flag as the final arg to the Tetra client constructor:
+
+   Earlydoc::Tetra::HIS.new 'example.com, 'un, 'pass', true
 
 ### Tetra Models
 
