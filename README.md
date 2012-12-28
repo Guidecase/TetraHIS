@@ -39,12 +39,6 @@ Use the `find_patient` method with search params to locate patients:
     tetra.find_patient( :last_name => surname ).data => <Earlydoc::Tetra::Patient>
     tetra.find_patient( :last_name => surname, :sex => 'M', :birthday => bday ).data => <Earlydoc::Tetra::Patient>
 
-**Slot Lists**
-
-The `SlotList` is the main container for Tetra HIS agendas, and can be normalized by day using the `flat` method. An optional max_days parameter can be provided to limit the number of days in the list.
-
-    my_slot_list.flat :max_days => 3
-
 ### Error Handling and Debugging
 
 Check the response for an API error, and inspect it for details about the error:
