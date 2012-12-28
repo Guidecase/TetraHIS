@@ -53,6 +53,15 @@ module Earlydoc
           end
         end
       end
+
+      def flat(opts={})
+        arr = flatten.uniq {|s| s.begin_time.day }
+        if opts[:max_days]
+          max_days = opts[:max_days] - 1
+          arr = arr.map{|s| Date.parse(s.begin_time.to_s) }[0..max_days] 
+        end
+        arr
+      end
       
       def to_xml
       end
