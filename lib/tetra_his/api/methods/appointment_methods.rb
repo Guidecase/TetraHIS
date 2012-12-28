@@ -14,6 +14,7 @@ module Earlydoc
           name_node = XML::Node.new('Lastname', patient_id_or_options[:last_name])
           email_node = XML::Node.new('Email', patient_id_or_options[:email])
           rpc 'MakeAppointmentUnknownPatientRequest', agenda_node, name_node, sex_node, email_node, from_node, to_node, remarks_node do |response|
+            response.data = Earlydoc::Tetra::Appointment.new response.hash['MakeAppointmentUnknownPatientResult']
           end
         else
           patient_node = XML::Node.new('PatientId', patient_id_or_options.to_s)
