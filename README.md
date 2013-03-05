@@ -52,6 +52,10 @@ Print out the request XML by passing a debug flag as the final arg to the Tetra 
 
    Earlydoc::Tetra::HIS.new 'example.com, 'un, 'pass', true
 
+The last request body can also be accessed through the client's `body` accessor (as an xml string):
+
+    tetra.body => <XML::Document>.to_s
+
 ### Tetra Models
 
 The various Tetra models represent the Tetra API's xml objects, and expose accessors on that data:

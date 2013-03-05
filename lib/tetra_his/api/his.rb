@@ -13,7 +13,7 @@ module Earlydoc
       format :plain
       default_timeout 30
     
-      attr_reader :auth, :debug
+      attr_reader :auth, :debug, :body
     
       def initialize(base_uri, username, password, debug=false)
         self.class.base_uri base_uri
@@ -35,7 +35,8 @@ module Earlydoc
       def request(method_name, *xml_nodes)
         xml = request_xml(method_name)
         xml_nodes.flatten.each { |node| xml.root << node }
-        options = {:XML => encoded_xml(xml)}
+        @body = encoded_xml(xml)
+        options = {:XML => @body}
 
         if @debug
           p "XML REQUEST:"
