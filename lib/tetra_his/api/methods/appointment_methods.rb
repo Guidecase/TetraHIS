@@ -2,18 +2,21 @@ module Earlydoc
   module Tetra
     module AppointmentMethods
       extend ActiveSupport::Concern
+
+      APPOINTMENT_DATE_FORMAT = "%Y-%m-%dT%H:%M:00"
     
       def make_appointment(agenda_id, patient_id_or_options, from, to, remarks=nil)
         agenda_node = XML::Node.new('AgendaId', agenda_id.to_s)
         remarks_node = XML::Node.new('Remarks', remarks)
-        from_node = XML::Node.new('TimeFrom', format_date(from, "%Y-%m-%dT%H:%M:00"))
-        to_node = XML::Node.new('TimeTill', format_date(to, "%Y-%m-%dT%H:%M:00"))
+        from_node = XML::Node.new('TimeFrom', format_date(from, APPOINTMENT_DATE_FORMAT))
+        to_node = XML::Node.new('TimeTill', format_date(to, APPOINTMENT_DATE_FORMAT))
         
         if patient_id_or_options.is_a? Hash
+          birthdate_node = XML::Node.new('Birthdate', patient_id_or_options[:birthday])
           sex_node = XML::Node.new('Sex', patient_id_or_options[:sex])          
           name_node = XML::Node.new('LastName', patient_id_or_options[:last_name])
           email_node = XML::Node.new('Email', patient_id_or_options[:email])
-          rpc 'MakeAppointmentUnknownPatientRequest', agenda_node, name_node, sex_node, email_node, from_node, to_node, remarks_node do |response|
+          rpc 'MakeAppointmentUnknownPatientRequest', agenda_node, name_node, sex_node, email_node, from_node, to_node, birthdate_node, remarks_node do |response|
             response.data = Earlydoc::Tetra::Appointment.new response.hash['MakeAppointmentUnknownPatientResult']
           end
         else
